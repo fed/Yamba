@@ -28,6 +28,17 @@ We’ll use the Android SDK tools to quickly find and fix problems.
 ###### Fragments
 Android 3.0 called for a newer approach to the user interface. The need to handle multiple screen sizes and orientations led to the introduction of fragments. We will tackle this UI framework by taking what we have done before and converting them over to this new approach.
 
+**TO DO List:**
+
+- [x] Create basic UI (status EditText, tweet Button, countdown TextView)
+- [x] Limit status field to 140 characters
+- [x] Implement character countdown
+- [x] Include Yamba library to connect to API (jar file)
+- [x] Create Async task to connect to the API on a separate thread
+- [x] Bind button click to trigger the Async task
+- [x] Show transaction result on a Toast message
+- [x] Create landscape alternative layout
+
 ### Part 2: Intents and ActionBar (branch codename: `FEAT-2`)
 
 This part is about using Android intents as a way to connect multiple parts together. At the end of this part, our Yamba application will have two screens: one for status updates and the other for setting up the preferences. At this point, Yamba is configurable for various users and starts being a useful app. The elements we’ll create at this stage are the activity, the menu system, and intents to glue them all together:
