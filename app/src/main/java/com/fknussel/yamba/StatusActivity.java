@@ -1,14 +1,18 @@
 package com.fknussel.yamba;
 
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.marakana.android.yamba.clientlib.YambaClient;
@@ -16,10 +20,13 @@ import com.marakana.android.yamba.clientlib.YambaClientException;
 
 
 public class StatusActivity extends ActionBarActivity {
+
+    private final String TAG = this.getClass().getSimpleName();
     
     private Button buttonTweet;
     private EditText editStatus;
-    private final String TAG = this.getClass().getSimpleName();
+    private TextView textCount;
+    private int defaultTextColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +35,9 @@ public class StatusActivity extends ActionBarActivity {
         
         buttonTweet = (Button) findViewById(R.id.buttonTweet);
         editStatus = (EditText) findViewById(R.id.editStatus);
+        textCount = (TextView) findViewById(R.id.textCount);
         
+        // Clicking on the Tweet button posts the status to the web service
         buttonTweet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,6 +48,38 @@ public class StatusActivity extends ActionBarActivity {
             }
         });
         
+        // Characters remaining
+        defaultTextColor = textCount.getTextColors().getDefaultColor();
+        
+        editStatus.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Determine how many characters are left
+                int count = 140 - editStatus.length();
+                
+                // Update the value on screen
+                textCount.setText(Integer.toString(count));
+                
+                // Update the text color accordingly
+                if (count > 10 && count < 50) {
+                    textCount.setTextColor(Color.YELLOW);
+                } else if (count < 10) {
+                    textCount.setTextColor(Color.RED);
+                } else if (count >= 50) {
+                    textCount.setTextColor(Color.GREEN);
+                }
+            }
+        });
     }
     
     private final class PostTask extends AsyncTask<String, Void, String> {

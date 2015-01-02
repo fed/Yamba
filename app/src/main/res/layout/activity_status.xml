@@ -15,12 +15,22 @@
         android:id="@+id/buttonTweet"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editStatus"
+        android:layout_alignTop="@+id/buttonTweet"
+        android:id="@+id/textCount"
+        android:text="140"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
     
     <EditText
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/editStatus"
         android:hint="@string/hint_status"
+        android:maxLength="140"
         android:layout_below="@id/buttonTweet"
         android:layout_marginTop="@dimen/activity_vertical_margin">
         <requestFocus />
