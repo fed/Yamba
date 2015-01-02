@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- App Info -->
     <string name="app_name">Yamba</string>
     
+    <!-- Menu Items -->
     <string name="action_settings">Settings</string>
 
+    <!-- Status Activity -->
     <string name="button_tweet">Tweet</string>
     <string name="hint_status">What\'s going on?</string>
 
+    <!-- Preference Screen -->
+    <string name="username">Username</string>
+    <string name="username_summary">Enter your username</string>
+    <string name="password">Password</string>
+    <string name="password_summary">Enter your password</string>
+    
 </resources>
