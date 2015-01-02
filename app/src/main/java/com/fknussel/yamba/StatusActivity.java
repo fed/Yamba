@@ -71,12 +71,14 @@ public class StatusActivity extends ActionBarActivity {
                 textCount.setText(Integer.toString(count));
                 
                 // Update the text color accordingly
-                if (count > 10 && count < 50) {
-                    textCount.setTextColor(Color.YELLOW);
-                } else if (count < 10) {
+                if (count < 10) {
                     textCount.setTextColor(Color.RED);
-                } else if (count >= 50) {
+                } else if (count > 10 && count < 50) {
+                    textCount.setTextColor(Color.YELLOW);
+                } else if (count >= 50 && count < 140) {
                     textCount.setTextColor(Color.GREEN);
+                } else if (count == 140) {
+                    textCount.setTextColor(defaultTextColor);
                 }
             }
         });
