@@ -38,6 +38,7 @@ Android 3.0 called for a newer approach to the user interface. The need to handl
 - [x] Bind button click to trigger the Async task
 - [x] Show transaction result on a Toast message
 - [x] Create landscape alternative layout
+- [x] Convert StatusActivity into StatusFragment
 
 ### Part 2: Intents and ActionBar (branch codename: `FEAT-2`)
 
