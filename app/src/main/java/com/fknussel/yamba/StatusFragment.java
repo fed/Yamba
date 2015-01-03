@@ -1,10 +1,14 @@
 package com.fknussel.yamba;
 
 import android.app.Fragment;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -90,8 +94,21 @@ public class StatusFragment extends Fragment {
     private final class PostTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
-            YambaClient yambaCloud = new YambaClient("student", "password");
 
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            String username = prefs.getString("username", "");
+            String password = prefs.getString("password", "");
+
+            // Check that username and password are not empty.
+            // If empty, Toast a message to set login info and bounce to SettingActivity.
+            if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
+                getActivity().startActivity(
+                    new Intent(getActivity(), SettingsActivity.class));
+                return "Please set your login information";
+            }
+
+            YambaClient yambaCloud = new YambaClient(username, password);
+            
             try {
                 yambaCloud.postStatus( params[0] );
                 return "Successfully posted";
