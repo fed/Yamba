@@ -2,15 +2,17 @@
 
 This is a Twitter-like application. We call it Yamba, which stands for *Yet Another Micro Blogging App*. Yamba lets a user connect to a cloud web service, pull down friends’ statuses, and update his own status.
 
-Yamba covers most of the main Android building blocks in a natural way. As such, it’s a great sample application to illustrate both how various components work individually and how they fit together. Services such as Twitter are more or less familiar to most people, so the features of the application do not require much explanation.
+Yamba is a great resource to start diving into Android development, since it covers most of the main Android building blocks in a natural way. As such, it’s a great sample application to illustrate both how various components work individually and how they fit together. Services such as Twitter are more or less familiar to most people, so the features of the application do not require much explanation.
 
 # Architectural Overview
+
+This is a high-level design diagram of what we are going to be building:
 
 ![Architectural Overview](/docs/architecture.png)
 
 # Roadmap
 
-The following is a list of all of the features we are going to introduce in the Yamba app. Since this is a project created for learning purposes, features will be tackled and developed gradually.
+The following is a list of all of the features we'll to introduce in the Yamba app. Since this is a project created for learning purposes, features will be tackled and developed gradually.
 
 ### Part 1: Android User Interface (branch codename: `FEAT-1`)
 
@@ -40,6 +42,8 @@ Android 3.0 called for a newer approach to the user interface. The need to handl
 - [x] Create landscape alternative layout
 - [x] Convert StatusActivity into StatusFragment
 
+Here's the link to the pull request for part 1: https://github.com/fknussel/Yamba/pull/1
+
 ### Part 2: Intents and ActionBar (branch codename: `FEAT-2`)
 
 This part is about using Android intents as a way to connect multiple parts together. At the end of this part, our Yamba application will have two screens: one for status updates and the other for setting up the preferences. At this point, Yamba is configurable for various users and starts being a useful app. The elements we’ll create at this stage are the activity, the menu system, and intents to glue them all together:
@@ -52,6 +56,17 @@ Next, we’ll need a way to get to that screen. For that purpose, we’ll introd
 
 ###### Filesystem
 Finally, we’ll learn about the filesystem on a typical Android device. We'll gain a deeper understanding of how the operating system is put together, and we'll also learn more about Android security.
+
+**TO DO List:**
+
+- [x] Create a Preference resource file called settings.xml
+- [x] Implement the SettingsActivity.java file that inflates the resource file
+- [x] Register this new Activity in the AndroidManifest.xml file
+- [x] Provide a way to start this Activity from the rest of the application. To do so, create a main.xml resource where we specify what the menu consists of.
+- [x] Add onCreateOptionsMenu() to the activity that should have this menu. This is where we inflate the menu.xml resource.
+- [x] Provide handling of menu events in onOptionsItemSelected()
+
+Here's the link to the pull request for part 2: https://github.com/fknussel/Yamba/pull/2
 
 ### Part 3: Android Services (branch codename: `FEAT-3`)
 This part introduces background services. By the end of this part, our Yamba application will be able to periodically connect to the cloud and pull down our friends’ status updates:
@@ -106,8 +121,12 @@ As a final piece to the application, we wanted to provide some more interaction 
 
 This app is presented as a practical example in the book:
 
-> Learning Android: Building Applications for the Android Market
-> By Marko Gargenta
-> http://shop.oreilly.com/product/0636920010883.do
+**Learning Android: Building Applications for the Android Market**
+*By Marko Gargenta and Masumi Nakamura* (January 27, 2014)
+http://shop.oreilly.com/product/0636920010883.do
 
 ![Book Cover](http://akamaicovers.oreilly.com/images/0636920010883/cat.gif)
+
+Here's the link to the author's repo: https://github.com/learning-android/
+
+This fork is based on the original idea but also introduces a fair bit of changes to it, in order to make the example even more comprehensive.
