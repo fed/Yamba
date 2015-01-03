@@ -38,6 +38,9 @@ public class MainActivity extends ActionBarActivity {
             case R.id.action_tweet:
                 startActivity(new Intent(this, StatusActivity.class));
                 break;
+            case R.id.action_refresh:
+                startService(new Intent(this, RefreshService.class));
+                break;
             default:
                 Toast.makeText(MainActivity.this, "Unsupported :(", Toast.LENGTH_SHORT).show();
         }

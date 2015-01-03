@@ -64,7 +64,8 @@ Finally, we’ll learn about the filesystem on a typical Android device. We'll g
 - [x] Register this new Activity in the AndroidManifest.xml file
 - [x] Provide a way to start this Activity from the rest of the application. To do so, create a main.xml resource where we specify what the menu consists of.
 - [x] Add onCreateOptionsMenu() to the activity that should have this menu. This is where we inflate the menu.xml resource.
-- [x] Provide handling of menu events in onOptionsItemSelected()
+- [x] Provide handling of menu events in onOptionsItemSelected(), link the corresponding options to the Settings and Status screen in order to let the user navigate through the app.
+- [x] Make use of the SharePreferences to authenticate against the API (StatusFragment.java)
 
 Here's the link to the pull request for part 2: https://github.com/fknussel/Yamba/pull/2
 
@@ -76,6 +77,16 @@ Android services are very useful building blocks. They allow a process to run in
 
 ###### Intent services
 These are a convenient way to run a task off the main thread so that thread can continue to handle user interaction. We’ll use one to get updates from Twitter.
+
+**TO DO List:**
+
+- [x] Create the Java class representing your service
+- [x] Register the service in the AndroidManifest.xml file
+- [x] Start the service from within your app by linking it to one of the options menu
+- [x] Make the service connect to the API and asynchronously fetch the latest posts
+- [x] Print out to LogCat the posts we just fetched
+
+Here's the link to the pull request for part 3: https://github.com/fknussel/Yamba/pull/3
 
 ### Part 4: Content Providers (branch codename: `FEAT-4`)
 We now have the data from our refresh service, so we need a place to store it. In this part we’ll introduce Android’s support for content providers, and data sources in general. By the end of that chapter, our data from the cloud will be persisted in the database:
@@ -119,14 +130,18 @@ As a final piece to the application, we wanted to provide some more interaction 
 
 # About Yamba
 
+<div style="float: right">
+    ![Book Cover](http://akamaicovers.oreilly.com/images/0636920010883/cat.gif)
+</div>
+
 This app is presented as a practical example in the book:
 
-**Learning Android: Building Applications for the Android Market**
-*By Marko Gargenta and Masumi Nakamura* (January 27, 2014)
+**Learning Android: Building Applications for the Android Market**<br/>
+*By Marko Gargenta and Masumi Nakamura* (2nd Edition, Jan 2014)<br/>
 http://shop.oreilly.com/product/0636920010883.do
-
-![Book Cover](http://akamaicovers.oreilly.com/images/0636920010883/cat.gif)
 
 Here's the link to the author's repo: https://github.com/learning-android/
 
-This fork is based on the original idea but also introduces a fair bit of changes to it, in order to make the example even more comprehensive.
+And here's the link to the API we'll be connecting to: http://yamba.marakana.com/
+
+This fork is based on the original idea but also introduces a fair bit of changes to it, in order to make the example even more comprehensive and updated.

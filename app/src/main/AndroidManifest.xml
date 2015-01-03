@@ -29,6 +29,8 @@
             android:label="@string/action_settings">
         </activity>
         
+        <service android:name=".RefreshService" />
+        
     </application>
 
 </manifest>
