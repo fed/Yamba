@@ -30,6 +30,11 @@
         </activity>
         
         <service android:name=".RefreshService" />
+
+        <provider
+            android:name=".StatusProvider"
+            android:authorities=".StatusProvider"
+            android:exported="false" />
         
     </application>
 
