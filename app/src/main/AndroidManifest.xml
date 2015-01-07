@@ -33,7 +33,7 @@
 
         <provider
             android:name=".StatusProvider"
-            android:authorities=".StatusProvider"
+            android:authorities="com.fknussel.yamba.StatusProvider"
             android:exported="false" />
         
     </application>
