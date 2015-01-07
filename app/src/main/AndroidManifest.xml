@@ -30,6 +30,11 @@
         </activity>
         
         <service android:name=".RefreshService" />
+
+        <provider
+            android:name=".StatusProvider"
+            android:authorities="com.fknussel.yamba.StatusProvider"
+            android:exported="false" />
         
     </application>
 
