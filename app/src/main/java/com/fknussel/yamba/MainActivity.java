@@ -44,6 +44,7 @@ public class MainActivity extends ActionBarActivity {
             case R.id.action_purge:
                 int rows = getContentResolver().delete(StatusContract.CONTENT_URI, null, null);
                 Toast.makeText(this, "Deleted " + rows + " rows", Toast.LENGTH_LONG).show();
+                break;
             default:
                 Toast.makeText(MainActivity.this, "Unsupported :(", Toast.LENGTH_SHORT).show();
         }
