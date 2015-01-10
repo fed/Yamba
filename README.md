@@ -115,6 +115,18 @@ Here's the link to the pull request for part 4: https://github.com/fknussel/Yamb
 ### Part 5: Lists and Adapters (branch codename: `FEAT-5`)
 It might sound like we're back in UI mode, but lists and adapters are more organizational aids than user interface elements in Android. They form very powerful components that allow our tiny UI to connect to very large datasets in an efficient and scalable manner. In other words, users will be able to use Yamba in the real world without any performance hits in the long run. Currently the data is all there in the database, but we have no way to view it. In this part, the Yamba application will get the much-needed TimelineActivity and a way for the user to see what his friends are chatting about online.
 
+**TO DO List:**
+
+- [x] Create a new fragment (TimelineFragment.java) which extends ListFragment
+- [x] Create a list item layout to define how a single unit of data will be displayed
+- [x] Create a new CursorAdapter to populate the ListView.
+- [x] Introduce some custom logic using ViewBinder to display the date in a human-friendly format
+- [x] Create a details activity as well as a details fragment to display more information when the user clicks on a tweet. Add these two components to the Manifest.
+- [x] Create a landscape layout for main activity to display the DetailsFragment next to the timeline
+- [x] Implement an onListItemClick() callback to TimelineFragment. This way, when the list gets clicked on, this method will get called and it’ll update the details view.
+
+Here's the link to the pull request for part 5: https://github.com/fknussel/Yamba/pull/6
+
 ### Part 6: Broadcast Receivers (branch codename: `FEAT-6`)
 Here we develop a third activity, doing so in multiple stages. First, we'll use our existing knowledge of the Android UI and put something together. It will work, but will not be as optimal as it could be. Finally, we'll get it right by introducing Lists and Adapters to the mix to use them to tie the data to our user interface.
 In this part we'll equip Yamba with receivers so it can react to events around it in an intelligent way. For that purpose, we'll use broadcast receivers. We show how to use Android permissions to make sure other people can't post statuses under the user's name:
