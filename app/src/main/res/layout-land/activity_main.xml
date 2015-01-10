@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- This is the timeline fragment -->
+    <fragment
+        android:id="@+id/fragment_timeline"
+        android:name="com.fknussel.yamba.TimelineFragment"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        tools:layout="@android:layout/list_content" />
+
+    <!-- The second fragment is our details fragment.
+    These two fragments will split the horizontal space evenly.
+    This is done via the android:layout_weight="1" property,
+    which defines that they both equally yield to one another for the desired width -->
+    <fragment
+        android:id="@+id/fragment_details"
+        android:name="com.fknussel.yamba.DetailsFragment"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        tools:layout="@layout/list_item" />
+</LinearLayout>
