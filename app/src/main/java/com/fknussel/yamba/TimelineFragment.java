@@ -3,12 +3,14 @@ package com.fknussel.yamba;
 import android.app.ListFragment;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
@@ -67,6 +69,25 @@ public class TimelineFragment extends ListFragment implements LoaderManager.Load
         getLoaderManager().initLoader(LOADER_ID, null, this);
     }
 
+    // onListItemClick() is called when an item in the list is clicked on
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        // We ask the fragment manager for DetailsFragment
+        DetailsFragment fragment = (DetailsFragment) getFragmentManager().findFragmentById(R.id.fragment_details);
+        
+        // Is details fragment visible? It is quite possible that DetailsFragment is not visible,
+        // such as with the portrait orientation of the small phone screen.
+        // In that case, DetailsFragment will be null. If DetailsFragment is not null, it’s visible.
+        // In that case, we simply call our method updateView() to have the fragment fetch
+        // the data from the content provider and update its view.
+        // Otherwise, we launch the details activity, which will do the same once
+        // it creates and attaches this fragment to it.
+        if (fragment != null && fragment.isVisible()) {
+            fragment.updateView(id);
+        } else {
+            startActivity(new Intent(getActivity(), DetailsActivity.class) .putExtra(StatusContract.Column.ID, id));
+        }
+    }
+    
     // --- Loader Callbacks ---
     // Executed on a non-UI thread
     
