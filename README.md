@@ -140,6 +140,15 @@ This type of receiver will exist only at certain times. Also, it won't receive m
 ###### Permissions
 At this point in the development process you know how to ask for system permissions, such as access to the Internet or filesystem.
 
+**TO DO List:**
+
+- [x] Create a broadcast receiver that will start automatically our refresh timeline service whenever we launch the app
+- [x] Register the receiver in the Manifest file and grant the required permissions
+- [x] Make use of the system's Alarm service to have our RefreshService started every so often
+- [x] Notify the user when there’s a new tweet by posting a notification message in the notification bar. The publisher will be the RefreshService.java file, whereas the subscriber will be a new broadcast receiver named NotificationReceiver.java. The former will use Broadcasting Intents to let the observers know when a new tweet has been fetched. The latter will receive this broadcast from us, and use another system service to post a notification to the user.
+
+Here's the link to the pull request for part 6: https://github.com/fknussel/Yamba/pull/8
+
 ### Part 7: App Widgets (branch codename: `FEAT-7`)
 In this part we'll look at how to use Android app widgets to create a home screen widget that displays the latest tweets:
 
