@@ -62,6 +62,7 @@ public class RefreshService extends IntentService {
         YambaClient cloud = new YambaClient(username, password);
 
         try {
+            // Initialize the count of new tweets to zero
             int count = 0;
             
             List<YambaClient.Status> timeline = cloud.getTimeline(20);
@@ -86,10 +87,18 @@ public class RefreshService extends IntentService {
 
                 if (uri != null) {
                     // Count how many successful inserts we actually had
+                    // ie: If there was a new tweet, increment the counter
                     count++;
                     Log.d(TAG, String.format("%s: %s", status.getUser(), status.getMessage()));
-                }
+                }   
             }
+
+            if (count > 0) {
+                // In case we have at least one new tweet, let’s use sendBroadcast()
+                // to send a broadcast to whoever cares about that
+                sendBroadcast(new Intent("com.fknussel.yamba.action.NEW_STATUSES").putExtra("count", count));
+            }
+            
         } catch(YambaClientException e) {
             Log.e(TAG, "Failed to fetch timeline", e);
             e.printStackTrace();
