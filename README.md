@@ -214,6 +214,15 @@ In this part we'll look at how to use Android app widgets to create a home scree
 ###### Android widgets
 But who will remember to pull up our app? To demonstrate the usefulness of our new status data, we'll put together an app widget. App widgets are those little com‐ ponents that the user can put on the home screen to see weather updates and such. We'll create a widget that will pull the latest status update from the Yamba database via the status data content provider and display it on the home screen.
 
+**TO DO List:**
+
+- [x] Create and implement the YambaWidget.java file
+- [x] Create the layout for the Widget (res/layout/widget.xml file)
+- [x] Create the AppWidgetProviderInfo file. This XML file is responsible for describing the widget. It typically specifies which layout this widget uses, how frequently it should be updated by the system, and its size.
+- [x] Update the manifest file and register the widget
+
+Here's the link to the pull request for part 7: https://github.com/fknussel/Yamba/pull/17
+
 ### Part 8: Networking and the Web (HTTP) (branch codename: `FEAT-8`)
 Up till now we have provided the underlying communication piece to our example application via a library. Here we want to take a brief step back and talk about how this communication is done and what Android's APIs provide to communicate via HTTP.
 
