@@ -1,14 +1,73 @@
-# Yamba
+# About Yamba
 
 This is a Twitter-like application. We call it Yamba, which stands for *Yet Another Micro Blogging App*. Yamba lets a user connect to a cloud web service, pull down friends' statuses, and update his own status.
 
+#### Functional requirements
+
+* The user should be able to post status updates.
+* The user should be able to see what their friends are up to.
+* The user should be able to update their username and password for the online account.
+
+So now we know we should have the following three screens: a screen for users to update their own status, a screen to see the status timelines of their friends, and a screen to set the preferences for the app.
+
+#### Non-functional requirements
+
+* We would like this app to work quickly regardless of the network connection or lack thereof. To achieve that, the app has to pull the data from the cloud when it’s online and cache the data locally. That will require a service that runs in the background as well as a database.
+* We also know that we’d like this background service to be started when the device is initially turned on, so by the time the user first uses the app, there’s already up-to-date information in the local cache.
+* Finally, we will want to display our friends' latest statuses on the home screen, as an Android Widget.
+
+#### Why Yamba
+
 Yamba is a great resource to start diving into Android development, since it covers most of the main Android building blocks in a natural way. As such, it's a great sample application to illustrate both how various components work individually and how they fit together. Services such as Twitter are more or less familiar to most people, so the features of the app do not require much explanation.
+
+This app is presented as a practical example in the book:
+
+![Book Cover](http://akamaicovers.oreilly.com/images/0636920010883/cat.gif)
+
+**Learning Android: Building Applications for the Android Market**<br/>
+*By Marko Gargenta and Masumi Nakamura* (2nd Edition, Jan 2014)<br/>
+http://shop.oreilly.com/product/0636920010883.do
+
+Here's the link to the **author's repo**: https://github.com/learning-android/
+
+And here's the link to the **API we'll be connecting to**: http://yamba.marakana.com/
+
+This fork is based on the original idea but also introduces a fair bit of changes to it, in order to make the example even more comprehensive and up to date.
+
+# Screenshots
+
+<table style="text-align: center;">
+	<tr>
+		<td><img src="/docs/screenshot_timeline.png" /></td>
+		<td><img src="/docs/screenshot_status.png" /></td>
+	</tr>
+	<tr>
+		<td><img src="/docs/screenshot_details.png" /></td>
+		<td><img src="/docs/screenshot_preferences.png" /></td>
+	</tr>
+</table>
 
 # Architectural Overview
 
 This is a high-level design diagram of what we are going to be building:
 
 ![Architectural Overview](/docs/architecture.png)
+
+# Components Overview
+
+Here's a brief description of the purposes for each of the components (classes) in our app:
+
+Building Block | Description
+------------ | -------------
+`MainActivity` | Holds the **timeline fragment**. Also defines the action for each of the **action bar options**.
+`SettingsActivity` | Bootstrap activity, holds the settings fragment.
+`SettingsFragment` | Preferences get stored in the PreferenceManager. See issue fknussel/Yamba#3
+`res/xml/settings.xml` | Root element: **PreferenceScreen**. Defines a couple EditText options that the user must fill in to log in and talk to the API (username and password).
+`StatusContract` | Defines the database params: db (file) name, schema version, the default sort order for the posts, table name and structure (columns). Also defines the provider specific constant: authority, content URI (content://AUTHORITY/TABLE NAME), and MIME types.
+`DbHelper` | This file just holds these two methods: `onCreate()` runs the SQL code needed to create the table (`CREATE TABLE status …`), and `onUpgrade()` drops the current table and creates a brand new one according to the new data definition. Especially useful when there are changes in the schema.
+`StatusProvider` | Defines all of the four CRUD methods (`insert()`, `query()`, `update()`, `delete()`) thus acting as a proxy to the database.
+`RefreshService` | The service’s duty consists of fetching the latest 20 posts from the restful API and storing them into our local database. Note that `RefreshService` extends the `IntentService` class instead of just `Service` since, by default, services execute on the UI thread. But we are making a network call here, so we need to do that on a separate thread. That’s why we use Android’s IntentService class which is just like a service except for two little features: whatever work is to be done in `onHandleIntent()` will execute on a separate worker thread, and once it’s done, the service will stop.
+`NotificationReceiver` | We want to notify the user when there’s a new tweet by posting a notification message in the notification bar. To do that, we need to send a broadcast first. A good place to send the broadcast would be our RefreshService —because that’s the code that knows there’s something new. Now we can create a receiver (NotificationReceiver) that will receive this broadcast from us, and use another system service to post a notification to the user.
 
 # Roadmap
 
@@ -160,19 +219,3 @@ Up till now we have provided the underlying communication piece to our example a
 
 ### Part 9: Live Wallpaper and Handlers (branch codename: `FEAT-9`)
 As a final piece to the application, we wanted to provide some more interaction at a system level. One of those ways is a fun, recently added concept in Android called Live Wallpaper, which runs on the home screen of the device. We build out a basic Live Wallpaper that interacts with the user and displays the messages communicated through the backend service. We also cover an important class called the Handler that enables another means to interact with the main UI thread from a different thread.
-
-# About Yamba
-
-This app is presented as a practical example in the book:
-
-![Book Cover](http://akamaicovers.oreilly.com/images/0636920010883/cat.gif)
-
-**Learning Android: Building Applications for the Android Market**<br/>
-*By Marko Gargenta and Masumi Nakamura* (2nd Edition, Jan 2014)<br/>
-http://shop.oreilly.com/product/0636920010883.do
-
-Here's the link to the author's repo: https://github.com/learning-android/
-
-And here's the link to the API we'll be connecting to: http://yamba.marakana.com/
-
-This fork is based on the original idea but also introduces a fair bit of changes to it, in order to make the example even more comprehensive and updated.
