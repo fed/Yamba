@@ -50,6 +50,8 @@ public class TimelineFragment extends ListFragment implements LoaderManager.Load
         super.onActivityCreated(savedInstanceState);
 
         setEmptyText("Loading data...");
+        
+        getActivity().startService(new Intent(getActivity(), RefreshService.class));
 
         // Here, we create the adapter that glues together the data to the
         // custom view R.layout.list_item. It does that by binding the database
